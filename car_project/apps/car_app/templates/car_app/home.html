@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p><a href="/logout">Logout</a><a href="/car/addcar" style="margin-left: 450px;">Add Car</a></p>
+    <h1>Welcome: {{request.session.user_first_name}}</h1>
+    <p>_________________________________________________________</p>
+    <h2>Your Cars:</h2>
+
+    {% for x in cars %}
+    <p>{{x.make}}&emsp;{{x.model}}&emsp;{{x.year}}</p>
+    {% endfor %}
+    <p>_________________________________________________________</p>
+    <h2>Other Users:</h2>
+    {% for u in users%}
+    <p><a href="/car/userD/{{u.id}}">{{u.first_name}}</a></p>
+    {% endfor %}
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Comment Board</h1>
+    {% if messages %} {%for message in messages %} {% if message.tags == "error" %}
+    <p style="color: red">{{message}} </p> {% endif %}{% if message.tags == "success" %}
+    <p style="color: green">{{message}} </p> {% endif %} {% endfor %} {% endif %}
+
+    <form action="/add" method='post'>
+        {% csrf_token %}
+        <input type="text" name="comment" placeholder="comment">
+
+        <input type="submit" name="submit" value='Add'>
+    </form>
+    {% for comment in comments %}
+    <p>{{comment.comment}}&emsp;{% load tz %}{{comment.created_at|timezone:"America/Los_Angeles"}}</p>
+    {% endfor %}
+</body>
+
+</html>

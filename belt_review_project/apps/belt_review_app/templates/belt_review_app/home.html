@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Welcome: {{request.session.user_name}}!</h2>
+    <p style="margin-left: 600px;"><a href="/review/addbookpage">Add Book and Review</a>&emsp; <a href="/logout">Logout</a></p>
+    <div style="display: inline-block; width: 40%">
+        <h3>Recent Book Reviews:</h3>
+        <div style="outline: 1px solid black; height: 300px; width: 350px; overflow: scroll; margin-top: 20px; vertical-align: top;">
+            {% for review in reviews %}
+            <p><a href="/review/reviewpage/{{review.book.id}}">{{review.book.title}}</a><br>{{review.score}}<br><a href="/review/user/{{review.user.id}}">{{review.user.name}}</a> Says: {{review.content}}<br>{% load tz %}{{review.created_at|timezone:"America/Los_Angeles"}}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div style="display: inline-block; width: 30%">
+        <h3>Other Books With Reviews:</h3>
+        <div style="outline: 1px solid black; height: 300px; width: 350px; overflow: scroll; margin-top: 20px; vertical-align: top;">
+            {% for book in books %}
+            <p><a href="/review/reviewpage/{{book.id}}">{{book.title}}</a></p>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+</html>

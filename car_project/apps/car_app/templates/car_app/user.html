@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p><a href="/logout">Logout</a>&emsp;<a href="/car">Home</a><a href="/car/addcar" style="margin-left: 250px;">Add Car</a></p>
+    {% for u in users %}
+    <h1>{{u.first_name}}</h1>
+    {% endfor %}
+    <h3>Total Cars: {{tcars}}</h3>
+    {% for x in cars %}
+    <p>{{x.make}}&emsp;{{x.model}}&emsp;{{x.year}}</p>
+    {% endfor %}
+</body>
+
+</html>

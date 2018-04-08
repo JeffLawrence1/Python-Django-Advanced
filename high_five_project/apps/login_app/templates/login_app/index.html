@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>Register</h2>
+    {% if messages %} {%for message in messages %} {% if message.tags == "error" %}
+    <p style="color: red">{{message}} </p> {% endif %}{% if message.tags == "success" %}
+    <p style="color: green">{{message}} </p> {% endif %} {% endfor %} {% endif %}
+    <form action="/register" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Enter your name"><br>
+        <input type="text" name="alias" placeholder="Enter your alias"><br>
+        <input type="text" name="email" placeholder="Enter your email"><br>
+        <input type="date" name="birthday" placeholder="Date of birth"><br>
+        <input type="text" name="password" placeholder="Enter your password"><br>
+        <h5>* Password should be at least 8 characters</h5>
+        <input type="text" name="confirm" placeholder="Confirm your password"><br>
+        <input type="submit" value="Register">
+    </form>
+
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        {% csrf_token %}
+        <input type="text" name="email" placeholder="Enter your email"><br>
+        <input type="text" name="password" placeholder="Enter your password"><br>
+        <input type="submit" value="Login">
+    </form>
+
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p style="margin-left: 600px;"><a href="/review">Home</a>&emsp; <a href="/logout">Logout</a></p>
+    <h2>Add a New Book Title and Review:</h2>
+    {% if messages %} {%for message in messages %} {% if message.tags == "error" %}
+    <p style="color: red">{{message}} </p> {% endif %}{% if message.tags == "success" %}
+    <p style="color: green">{{message}} </p> {% endif %} {% endfor %} {% endif %}
+    <form action="/review/addbook" method="post">
+        {% csrf_token %}
+
+        <p>Book Title:</p>
+        <input type="text" name="title" placeholder="book title"><br>
+        <p>Author:</p>
+        <p>select from list</p>
+
+        <select name='author'>
+            {% for author in authors %}
+            <option></option>
+            <option value="{{ author.id }}">{{ author.name }}</option>
+            {% endfor %}
+        </select>
+        <p>add new author</p>
+        <input type="text" name="add_author" placeholder="author"><br>
+        <p>Review:</p>
+        <textarea name="review" placeholder="review" rows="8" cols="40"></textarea><br>
+        <p>Rating:</p>
+        <select name='rating'>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>         
+        </select><br>
+        <br>
+        <button type="submit">Add Book and Review</button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    {% if messages %} {%for message in messages %} {% if message.tags == "error" %}
+    <p style="color: red">{{message}} </p> {% endif %}{% if message.tags == "success" %}
+    <p style="color: green">{{message}} </p> {% endif %} {% endfor %} {% endif %} {% for x in pop %}
+    <h1>The number you removed was: {{pop}}</h1>
+    {% endfor %}
+    <h1>Add a number to the list!</h1>
+    <form action="/add" method='post'>
+        {% csrf_token %}
+        <input type="text" name="number" placeholder="number">
+
+        <input type="submit" name="submit" value='Add'>
+    </form>
+    <br>
+    <form action="/remove" method='post'>
+        {% csrf_token %}
+
+
+        <input type="submit" name="submit" value=Remove '>
+    </form>
+</body>
+
+</html>

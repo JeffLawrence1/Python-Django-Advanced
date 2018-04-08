@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p style="margin-left: 600px;"><a href="/review">Home</a>&emsp; <a href="/logout">Logout</a></p>
+    <div style="display: inline-block; width: 50%; vertical-align: top;">
+        {% for x in book %}
+        <h2>{{x.title}}</h2>
+        <h3>Author: {{x.author.name}}</h3>
+        {% endfor %}
+        <h2>Reviews:</h2>
+        {% for i in reviews%}
+        <p>__________________________________________________</p>
+        <p>{{i.score}}</p>
+        <p><a href="/review/user/{{i.user.id}}">{{i.user.name}}</a> Says:{{i.content}}</p>
+        <p>{% load tz %}{{i.created_at|timezone:"America/Los_Angeles"}}</p>
+        {% if i.user.id == request.session.user_id %}
+        <p>
+            <a href="/review/delete/{{i.id}}">Delete The Review</a></p>
+        {% endif %} {% endfor%}
+
+    </div>
+    <div style="display: inline-block; width: 40%; vertical-align: top;">
+        <h2>Add A Review:</h2>
+        {% for x in book %}
+        <form action="/review/addreview/{{x.id}}" method="post">
+            {% csrf_token %}
+            <textarea name="review" placeholder="review" rows="10" cols="60"></textarea><br>
+            <p>Rating:</p>
+            <select name='rating'>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>         
+            </select><br>
+            <button style="margin-left: 150px" type="submit">Add Review</button> {% endfor %}
+    </div>
+</body>
+
+</html>
